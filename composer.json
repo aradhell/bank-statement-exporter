@@ -13,7 +13,9 @@
       "email": "alan.zieba@gmail.com"
     }
   ],
-  "require": {},
+  "require": {
+    "ext-simplexml": "*"
+  },
   "require-dev": {
     "phpunit/phpunit": "8.*"
   },

@@ -12,7 +12,7 @@ class BSExporterTest extends TestCase
     public function testCAMTFullExportSuccess(): void
     {
         $bsexporter = new BSExporter();
-        $input = new CAMTInput();
+        $input = new CAMTInput([], '', '', '', '', '','', '');
         // ToDo: add input items
         $expected = $this->createSimpleXMLCAMTSuccessResult($input);
 
@@ -31,7 +31,7 @@ class BSExporterTest extends TestCase
 
     public function testFactoryCAMT(): void
     {
-        $input = new CAMTInput();
+        $input = new CAMTInput([], '', '', '', '', '','', '');
         $factory = new ExporterFactory();
 
         $result = $factory->create($input);
@@ -42,7 +42,7 @@ class BSExporterTest extends TestCase
 
     public function testCAMTExporterSuccess(): void
     {
-        $input = new CAMTInput();
+        $input = new CAMTInput([], '', '', '', '', '','', '');
         $exporter = new CAMTExporter();
         $expected = $this->createCAMTExporterResult($input);
 
