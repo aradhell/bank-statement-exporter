@@ -2,7 +2,7 @@
 
 namespace BSExporter\Inputs\CAMT;
 
-class CAMTInputItem
+class TransactionItem
 {
     private $a;
 }
