@@ -1,11 +1,11 @@
 <?php
 
-namespace BSExporter\Input;
+namespace BSExporter\Inputs;
 
-class COMTInput implements InputInterface
+class CAMTInput implements InputInterface
 {
     /**
-     * @var COMTInputItem[]
+     * @var CAMTInputItem[]
      */
     private $items = [];
     /**
