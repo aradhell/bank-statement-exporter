@@ -2,7 +2,7 @@
   "name": "aradhell/bank-statement-exporter",
   "description": "Exports bank statements from given input",
   "license": "MIT",
-  "keywords": ["bank statement","comt export"],
+  "keywords": ["bank statement","camt export"],
   "authors": [
     {
       "name": "Alper Cevik",

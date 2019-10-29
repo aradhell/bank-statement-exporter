@@ -1,6 +1,8 @@
 <?php
 
-namespace BSExporter\Inputs;
+namespace BSExporter\Inputs\CAMT;
+
+use BSExporter\Inputs\InputInterface;
 
 class CAMTInput implements InputInterface
 {

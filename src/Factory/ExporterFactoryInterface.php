@@ -1,11 +1,11 @@
 <?php
 
-namespace BSExporter;
+namespace BSExporter\Factory;
 
 use BSExporter\Exporters\ExporterInterface;
 use BSExporter\Inputs\InputInterface;
 
-interface BSExporterFactoryInterface
+interface ExporterFactoryInterface
 {
     public function create(InputInterface $input): ExporterInterface;
 }
