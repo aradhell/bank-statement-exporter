@@ -1,0 +1,25 @@
+{
+  "name": "aradhell/bank-statement-exporter",
+  "description": "Exports bank statements from given input",
+  "license": "MIT",
+  "keywords": ["bank statement","comt export"],
+  "authors": [
+    {
+      "name": "Alper Cevik",
+      "email": "alpercevik@outlook.com"
+    },
+    {
+      "name": "Alan Zieba",
+      "email": "alan.zieba@gmail.com"
+    }
+  ],
+  "require": {},
+  "require-dev": {
+    "phpunit/phpunit": "8.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "BSExporter\\": "src/"
+    }
+  }
+}
