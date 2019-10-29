@@ -2,7 +2,7 @@
 
 namespace BSExporter\Input;
 
-class Input
+class COMTInputItem
 {
-
+    private $a;
 }
