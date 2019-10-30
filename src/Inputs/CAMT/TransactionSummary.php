@@ -41,11 +41,11 @@ class TransactionSummary
 
     private function calculateSum(): float
     {
-        $sum = 0.00;
+        $sum_ = 0.00;
         foreach ($this->transactions as $transaction) {
-            $sum += $transaction->getAmount();
+            $sum_ += $transaction->getAmount();
         }
-        return $sum;
+        return $sum_;
     }
 
     private function calculateTotalNetAmount(): float
@@ -57,8 +57,6 @@ class TransactionSummary
             } else {
                 $totalNetAmount -= $transaction->getAmount();
             }
-            var_dump($transaction->getAmount());
-            var_dump($totalNetAmount);
         }
         return $totalNetAmount;
     }
