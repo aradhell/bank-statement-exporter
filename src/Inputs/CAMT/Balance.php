@@ -1,6 +1,6 @@
 <?php
 
-namespace BSExporter\Inputs;
+namespace BSExporter\Inputs\CAMT;
 
 class Balance
 {
@@ -30,4 +30,26 @@ class Balance
      * @var \DateTime
      */
     private $date;
+
+    /**
+     * Balance constructor.
+     * @param string $code
+     * @param string $currencv
+     * @param float $amount
+     * @param string $creditDebitIndicator
+     * @param \DateTime $date
+     */
+    public function __construct(
+        string $code,
+        string $currencv,
+        float $amount,
+        string $creditDebitIndicator,
+        \DateTime $date
+    ) {
+        $this->code = $code;
+        $this->currencv = $currencv;
+        $this->amount = $amount;
+        $this->creditDebitIndicator = $creditDebitIndicator;
+        $this->date = $date;
+    }
 }

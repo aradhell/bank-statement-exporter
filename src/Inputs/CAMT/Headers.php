@@ -1,6 +1,6 @@
 <?php
 
-namespace BSExporter\Inputs;
+namespace BSExporter\Inputs\CAMT;
 
 class Headers
 {
@@ -10,7 +10,7 @@ class Headers
      */
     private $messageId;
     /**
-     * @var \DateTime 2019-10-25T08:23:54.886386+01:00
+     * @var string 2019-10-25T08:23:54.886386+01:00
      */
     private $creationDateTime;
     /**
@@ -21,6 +21,26 @@ class Headers
      * @var string 19276
      */
     private $electronicSequenceNumber;
+
+    /**
+     * Headers constructor.
+     * @param string $messageId
+     * @param string $creationDateTime
+     * @param string $id
+     * @param string $electronicSequenceNumber
+     */
+    public function __construct(
+        string $messageId,
+        string $creationDateTime,
+        string $id,
+        string $electronicSequenceNumber
+    ) {
+        $this->messageId = $messageId;
+        $this->creationDateTime = $creationDateTime;
+        $this->id = $id;
+        $this->electronicSequenceNumber = $electronicSequenceNumber;
+    }
+
 
     /**
      * @return string
@@ -39,17 +59,17 @@ class Headers
     }
 
     /**
-     * @return \DateTime
+     * @return string
      */
-    public function getCreationDateTime(): \DateTime
+    public function getCreationDateTime(): string
     {
         return $this->creationDateTime;
     }
 
     /**
-     * @param \DateTime $creationDateTime
+     * @param string $creationDateTime
      */
-    public function setCreationDateTime(\DateTime $creationDateTime): void
+    public function setCreationDateTime(string $creationDateTime): void
     {
         $this->creationDateTime = $creationDateTime;
     }
