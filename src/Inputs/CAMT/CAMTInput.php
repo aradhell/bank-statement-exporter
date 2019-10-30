@@ -7,51 +7,52 @@ use BSExporter\Inputs\InputInterface;
 class CAMTInput implements InputInterface
 {
     /**
-     * @var TransactionItem[]
+     * @var Transaction[]
      */
     private $transactions = [];
-    private $iban;
-    private $currency;
-    private $accountName;
-    private $msgId;
-    private $statementId;
-    private $electronicSequenceNumber;
-    private $createDateTime;
+    /**
+     * @var Balance[]
+     */
+    private $balances = [];
+    /**
+     * @var Account
+     */
+    private $account;
+
+    /**
+     * @var Headers
+     */
+    private $headers;
+
+    /**
+     * @var TransactionSummary
+     */
+    private $transactionSummary;
 
     /**
      * CAMTInput constructor.
-     * @param TransactionItem[] $transactions
-     * @param $iban
-     * @param $currency
-     * @param $accountName
-     * @param $msgId
-     * @param $statementId
-     * @param $electronicSequenceNumber
-     * @param $createDateTime
+     * @param Transaction[] $transactions
+     * @param Balance[] $balances
+     * @param Account $account
+     * @param Headers $headers
+     * @param TransactionSummary $transactionSummary
      */
     public function __construct(
         array $transactions,
-        $iban,
-        $currency,
-        $accountName,
-        $msgId,
-        $statementId,
-        $electronicSequenceNumber,
-        $createDateTime
+        array $balances,
+        Account $account,
+        Headers $headers,
+        TransactionSummary $transactionSummary
     ) {
         $this->transactions = $transactions;
-        $this->iban = $iban;
-        $this->currency = $currency;
-        $this->accountName = $accountName;
-        $this->msgId = $msgId;
-        $this->statementId = $statementId;
-        $this->electronicSequenceNumber = $electronicSequenceNumber;
-        $this->createDateTime = $createDateTime;
+        $this->balances = $balances;
+        $this->account = $account;
+        $this->headers = $headers;
+        $this->transactionSummary = $transactionSummary;
     }
 
-
     /**
-     * @return TransactionItem[]
+     * @return Transaction[]
      */
     public function getTransactions(): array
     {
@@ -59,7 +60,7 @@ class CAMTInput implements InputInterface
     }
 
     /**
-     * @param TransactionItem[] $transactions
+     * @param Transaction[] $transactions
      */
     public function setTransactions(array $transactions): void
     {
@@ -67,114 +68,68 @@ class CAMTInput implements InputInterface
     }
 
     /**
-     * @return mixed
+     * @return Balance[]
      */
-    public function getIban()
+    public function getBalances(): array
     {
-        return $this->iban;
+        return $this->balances;
     }
 
     /**
-     * @param mixed $iban
+     * @param Balance[] $balances
      */
-    public function setIban($iban): void
+    public function setBalances(array $balances): void
     {
-        $this->iban = $iban;
+        $this->balances = $balances;
     }
 
     /**
-     * @return mixed
+     * @return Account
      */
-    public function getCurrency()
+    public function getAccount(): Account
     {
-        return $this->currency;
+        return $this->account;
     }
 
     /**
-     * @param mixed $currency
+     * @param Account $account
      */
-    public function setCurrency($currency): void
+    public function setAccount(Account $account): void
     {
-        $this->currency = $currency;
+        $this->account = $account;
     }
 
     /**
-     * @return mixed
+     * @return Headers
      */
-    public function getAccountName()
+    public function getHeaders(): Headers
     {
-        return $this->accountName;
+        return $this->headers;
     }
 
     /**
-     * @param mixed $accountName
+     * @param Headers $headers
      */
-    public function setAccountName($accountName): void
+    public function setHeaders(Headers $headers): void
     {
-        $this->accountName = $accountName;
+        $this->headers = $headers;
     }
 
     /**
-     * @return mixed
+     * @return TransactionSummary
      */
-    public function getMsgId()
+    public function getTransactionSummary(): TransactionSummary
     {
-        return $this->msgId;
+        return $this->transactionSummary;
     }
 
     /**
-     * @param mixed $msgId
+     * @param TransactionSummary $transactionSummary
+     * @return CAMTInput
      */
-    public function setMsgId($msgId): void
+    public function setTransactionSummary(TransactionSummary $transactionSummary): CAMTInput
     {
-        $this->msgId = $msgId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getStatementId()
-    {
-        return $this->statementId;
-    }
-
-    /**
-     * @param mixed $statementId
-     */
-    public function setStatementId($statementId): void
-    {
-        $this->statementId = $statementId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getElectronicSequenceNumber()
-    {
-        return $this->electronicSequenceNumber;
-    }
-
-    /**
-     * @param mixed $electronicSequenceNumber
-     */
-    public function setElectronicSequenceNumber($electronicSequenceNumber): void
-    {
-        $this->electronicSequenceNumber = $electronicSequenceNumber;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCreateDateTime()
-    {
-        return $this->createDateTime;
-    }
-
-    /**
-     * @param mixed $createDateTime
-     */
-    public function setCreateDateTime($createDateTime): void
-    {
-        $this->createDateTime = $createDateTime;
+        $this->transactionSummary = $transactionSummary;
+        return $this;
     }
 }

@@ -9,10 +9,13 @@ use PHPUnit\Framework\TestCase;
 
 class BSExporterTest extends TestCase
 {
+    /**
+     * @requires PHP 9000
+     */
     public function testCAMTFullExportSuccess(): void
     {
         $bsexporter = new BSExporter();
-        $input = new CAMTInput([], '', '', '', '', '','', '');
+        $input = new CAMTInput([], '', '', '', '', '', '', '');
         // ToDo: add input items
         $expected = $this->createSimpleXMLCAMTSuccessResult($input);
 
@@ -31,7 +34,7 @@ class BSExporterTest extends TestCase
 
     public function testFactoryCAMT(): void
     {
-        $input = new CAMTInput([], '', '', '', '', '','', '');
+        $input = new CAMTInput([], '', '', '', '', '', '', '');
         $factory = new ExporterFactory();
 
         $result = $factory->create($input);
@@ -39,10 +42,12 @@ class BSExporterTest extends TestCase
         $this->assertInstanceOf(CAMTExporter::class, $result);
         $this->assertEquals(new CAMTExporter(), $result);
     }
-
+    /**
+     * @requires PHP 9000
+     */
     public function testCAMTExporterSuccess(): void
     {
-        $input = new CAMTInput([], '', '', '', '', '','', '');
+        $input = new CAMTInput([], '', '', '', '', '', '', '');
         $exporter = new CAMTExporter();
         $expected = $this->createCAMTExporterResult($input);
 
