@@ -1,6 +1,6 @@
 <?php
 
-namespace BSExporter\Inputs;
+namespace BSExporter\Inputs\CAMT;
 
 class TransactionItem
 {

@@ -8,5 +8,6 @@ class CAMTExporter implements ExporterInterface
 {
     public function export(InputInterface $input): string
     {
+        return '';
     }
 }
