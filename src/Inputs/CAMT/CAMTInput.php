@@ -60,27 +60,11 @@ class CAMTInput implements InputInterface
     }
 
     /**
-     * @param Transaction[] $transactions
-     */
-    public function setTransactions(array $transactions): void
-    {
-        $this->transactions = $transactions;
-    }
-
-    /**
      * @return Balance[]
      */
     public function getBalances(): array
     {
         return $this->balances;
-    }
-
-    /**
-     * @param Balance[] $balances
-     */
-    public function setBalances(array $balances): void
-    {
-        $this->balances = $balances;
     }
 
     /**
@@ -92,14 +76,6 @@ class CAMTInput implements InputInterface
     }
 
     /**
-     * @param Account $account
-     */
-    public function setAccount(Account $account): void
-    {
-        $this->account = $account;
-    }
-
-    /**
      * @return Headers
      */
     public function getHeaders(): Headers
@@ -108,28 +84,10 @@ class CAMTInput implements InputInterface
     }
 
     /**
-     * @param Headers $headers
-     */
-    public function setHeaders(Headers $headers): void
-    {
-        $this->headers = $headers;
-    }
-
-    /**
      * @return TransactionSummary
      */
     public function getTransactionSummary(): TransactionSummary
     {
         return $this->transactionSummary;
-    }
-
-    /**
-     * @param TransactionSummary $transactionSummary
-     * @return CAMTInput
-     */
-    public function setTransactionSummary(TransactionSummary $transactionSummary): CAMTInput
-    {
-        $this->transactionSummary = $transactionSummary;
-        return $this;
     }
 }

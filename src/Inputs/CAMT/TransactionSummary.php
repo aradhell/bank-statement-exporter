@@ -67,4 +67,36 @@ class TransactionSummary
             $this->creditDebitIndicator = 'CRDT';
         }
     }
+
+    /**
+     * @return int
+     */
+    public function getTotalEntries(): int
+    {
+        return $this->totalEntries;
+    }
+
+    /**
+     * @return float
+     */
+    public function getSum(): float
+    {
+        return $this->sum;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTotalNetEntryAmount(): float
+    {
+        return $this->totalNetEntryAmount;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreditDebitIndicator(): string
+    {
+        return $this->creditDebitIndicator;
+    }
 }
