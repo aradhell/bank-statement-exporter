@@ -39,14 +39,6 @@ class Account
     }
 
     /**
-     * @param string $IBAN
-     */
-    public function setIBAN(string $IBAN): void
-    {
-        $this->IBAN = $IBAN;
-    }
-
-    /**
      * @return string
      */
     public function getCurrency(): string
@@ -55,26 +47,10 @@ class Account
     }
 
     /**
-     * @param string $currency
-     */
-    public function setCurrency(string $currency): void
-    {
-        $this->currency = $currency;
-    }
-
-    /**
      * @return string
      */
     public function getName(): string
     {
         return $this->name;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName(string $name): void
-    {
-        $this->name = $name;
     }
 }

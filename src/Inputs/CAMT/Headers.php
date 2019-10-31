@@ -41,21 +41,12 @@ class Headers
         $this->electronicSequenceNumber = $electronicSequenceNumber;
     }
 
-
     /**
      * @return string
      */
     public function getMessageId(): string
     {
         return $this->messageId;
-    }
-
-    /**
-     * @param string $messageId
-     */
-    public function setMessageId(string $messageId): void
-    {
-        $this->messageId = $messageId;
     }
 
     /**
@@ -67,14 +58,6 @@ class Headers
     }
 
     /**
-     * @param string $creationDateTime
-     */
-    public function setCreationDateTime(string $creationDateTime): void
-    {
-        $this->creationDateTime = $creationDateTime;
-    }
-
-    /**
      * @return string
      */
     public function getId(): string
@@ -83,26 +66,10 @@ class Headers
     }
 
     /**
-     * @param string $id
-     */
-    public function setId(string $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
      * @return string
      */
     public function getElectronicSequenceNumber(): string
     {
         return $this->electronicSequenceNumber;
-    }
-
-    /**
-     * @param string $electronicSequenceNumber
-     */
-    public function setElectronicSequenceNumber(string $electronicSequenceNumber): void
-    {
-        $this->electronicSequenceNumber = $electronicSequenceNumber;
     }
 }
