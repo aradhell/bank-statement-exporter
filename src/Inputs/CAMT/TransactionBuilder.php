@@ -4,7 +4,6 @@ namespace BSExporter\Inputs\CAMT;
 
 class TransactionBuilder
 {
-
     /**
      * @var Transaction
      */
@@ -12,7 +11,7 @@ class TransactionBuilder
 
     public function __construct()
     {
-        $this->transaction = new Transaction();
+        $this->reset();
     }
 
     public function build(): Transaction
