@@ -27,7 +27,7 @@ class Balance
     private $creditDebitIndicator;
     /**
      * Y-m-d
-     * @var \DateTime
+     * @var string
      */
     private $date;
 
@@ -37,19 +37,59 @@ class Balance
      * @param string $currencv
      * @param float $amount
      * @param string $creditDebitIndicator
-     * @param \DateTime $date
+     * @param string $date
      */
     public function __construct(
         string $code,
         string $currencv,
         float $amount,
         string $creditDebitIndicator,
-        \DateTime $date
+        string $date
     ) {
         $this->code = $code;
         $this->currencv = $currencv;
         $this->amount = $amount;
         $this->creditDebitIndicator = $creditDebitIndicator;
         $this->date = $date;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode(): string
+    {
+        return $this->code;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrencv(): string
+    {
+        return $this->currencv;
+    }
+
+    /**
+     * @return float
+     */
+    public function getAmount(): float
+    {
+        return $this->amount;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreditDebitIndicator(): string
+    {
+        return $this->creditDebitIndicator;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDate(): string
+    {
+        return $this->date;
     }
 }
