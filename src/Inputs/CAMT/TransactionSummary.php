@@ -99,4 +99,55 @@ class TransactionSummary
     {
         return $this->creditDebitIndicator;
     }
+
+    public function calculateCreditSum(): float
+    {
+        return $this->calculateSumByType('CRDT');
+    }
+
+    public function calculateDebitSum(): float
+    {
+        return $this->calculateSumByType('DBIT');
+    }
+
+    private function calculateSumByType(string $type): float
+    {
+        $result = 0;
+
+        foreach ($this->transactions as $transaction) {
+            if ($transaction->getCreditDebitIndicator() === $type) {
+                $result += $transaction->getAmount();
+            }
+        }
+
+        return $result;
+    }
+
+    public function countCreditEntries(): int
+    {
+        return $this->countEntries('CRDT');
+    }
+
+    public function countDebitEntries(): int
+    {
+        return $this->countEntries('DBIT');
+    }
+
+    /**
+     * @param string $type Member of {@see TransactionSummary::getCreditDebitIndicator()}
+     *
+     * @return int
+     */
+    private function countEntries(string $type): int
+    {
+        $result = 0;
+
+        foreach ($this->transactions as $transaction) {
+            if ($transaction->getCreditDebitIndicator() === $type) {
+                $result++;
+            }
+        }
+
+        return $result;
+    }
 }
