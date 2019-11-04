@@ -18,7 +18,7 @@ class ExporterFactory implements ExporterFactoryInterface
             throw new \Exception('Exporter not implemented.');
         }
         
-        $exporter = new $type;
+        $exporter = new $type();
 
         if (!($exporter instanceof ExporterInterface)) {
             throw new \Exception('Exporter not implemented.');

@@ -4,37 +4,38 @@ namespace BSExporter;
 
 use BSExporter\Exporters\CAMTExporter;
 use BSExporter\Factory\ExporterFactory;
+use BSExporter\Inputs\CAMT\Account;
+use BSExporter\Inputs\CAMT\Balance;
 use BSExporter\Inputs\CAMT\CAMTInput;
+use BSExporter\Inputs\CAMT\Headers;
+use BSExporter\Inputs\CAMT\TransactionBuilder;
+use BSExporter\Inputs\CAMT\TransactionSummary;
+use DateTimeZone;
 use PHPUnit\Framework\TestCase;
 
 class BSExporterTest extends TestCase
 {
-    /**
-     * @requires PHP 9000
-     */
+
     public function testCAMTFullExportSuccess(): void
     {
-        $bsexporter = new BSExporter();
-        $input = new CAMTInput([], '', '', '', '', '', '', '');
-        // ToDo: add input items
-        $expected = $this->createSimpleXMLCAMTSuccessResult($input);
+        $input = $this->createCAMTInput();
+        $factory = new ExporterFactory();
 
-        $result = $bsexporter->export($input);
+        $exporter = $factory->create($input);
 
-        $this->assertEquals($expected, $result);
-    }
-
-    private function createSimpleXMLCAMTSuccessResult(CAMTInput $input): string
-    {
-        $result = new \SimpleXMLElement('<?xml version="1.0"?><data></data>');
-        // ToDo: fill result by proper example data
-
-        return $result->asXML();
+        $result = $exporter->export($input);
+        print_r($result);
     }
 
     public function testFactoryCAMT(): void
     {
-        $input = new CAMTInput([], '', '', '', '', '', '', '');
+        $input = new CAMTInput(
+            [],
+            [],
+            new Account('', '', ''),
+            new Headers('', '', '', ''),
+            new TransactionSummary([])
+        );
         $factory = new ExporterFactory();
 
         $result = $factory->create($input);
@@ -42,25 +43,55 @@ class BSExporterTest extends TestCase
         $this->assertInstanceOf(CAMTExporter::class, $result);
         $this->assertEquals(new CAMTExporter(), $result);
     }
-    /**
-     * @requires PHP 9000
-     */
-    public function testCAMTExporterSuccess(): void
+
+
+    private function createCAMTInput(): CAMTInput
     {
-        $input = new CAMTInput([], '', '', '', '', '', '', '');
-        $exporter = new CAMTExporter();
-        $expected = $this->createCAMTExporterResult($input);
+        $bookingDate = '2019-10-28';
+        $valueDate = '2019-10-28';
+        $transactionBuilder = new TransactionBuilder();
+        $transactionCrdt = $transactionBuilder->setEntryReference('reference')
+            ->setAmount(134123.11)
+            ->setCurrency('EUR')
+            ->setCreditDebitIndicator('CRDT')
+            ->setStatus('BOOK')
+            ->setBookingDate($bookingDate)
+            ->setValueDate($valueDate)
+            ->setAccountServicerReference('accountServicerRef')
+            ->build();
 
-        $result = $exporter->export($input);
+        $transactionBuilder->reset();
 
-        $this->assertEquals($expected, $result);
-    }
+        $transactionDbit = $transactionBuilder->setEntryReference('reference')
+            ->setAmount(34123.01)
+            ->setCurrency('EUR')
+            ->setCreditDebitIndicator('DBIT')
+            ->setStatus('BOOK')
+            ->setBookingDate($bookingDate)
+            ->setValueDate($valueDate)
+            ->setAccountServicerReference('accountServicerRef')
+            ->build();
 
-    private function createCAMTExporterResult(CAMTInput $input): string
-    {
-        $result = new \SimpleXMLElement('<?xml version="1.0"?><data></data>');
-        // ToDo: fill result by proper example data
+        $transactions = [$transactionCrdt, $transactionDbit];
 
-        return $result->asXML();
+        $transactionSummary = new TransactionSummary($transactions);
+
+        $account = new Account('iban', 'currency', 'name');
+        $date = new \DateTime();
+        $creationDateTime = $date->setTimeZone(new DateTimeZone('Europe/Amsterdam'))->format("Y-m-d\TH:i:s.uP");
+
+        $headers = new Headers('message_id', $creationDateTime, 'id', 'seqno');
+
+        $balance = new Balance('OPBD', 'EUR', 15286.98, 'CRDT', $bookingDate);
+
+        $CAMTInput = new CAMTInput(
+            $transactions,
+            [$balance],
+            $account,
+            $headers,
+            $transactionSummary
+        );
+
+        return $CAMTInput;
     }
 }

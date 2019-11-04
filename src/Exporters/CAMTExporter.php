@@ -14,19 +14,21 @@ class CAMTExporter implements ExporterInterface
     public function export(InputInterface $input): string
     {
         $xml = new \SimpleXMLElement(
-            '<?xml version="1.0" encoding="UTF-8"?><Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.02"></Document>'
+            '<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.02">
+</Document>'
         );
 //ToDo: Any possibility to automatize this by input parameters?
         $BkToCstmrStmt = $xml->addChild('BkToCstmrStmt');
 
         $GrpHdr = $BkToCstmrStmt->addChild('GrpHdr');
         $GrpHdr->addChild('MsgId', $input->getHeaders()->getMessageId());
-        $GrpHdr->addChild('CreDtTm', $input->getHeaders()->getCreationDateTime);
+        $GrpHdr->addChild('CreDtTm', $input->getHeaders()->getCreationDateTime());
 
         $Stmt = $BkToCstmrStmt->addChild('Stmt');
         $Stmt->addChild('Id', $input->getHeaders()->getId());
         $Stmt->addChild('ElctrncSeqNb', $input->getHeaders()->getElectronicSequenceNumber());
-        $Stmt->addChild('CreDtTm', $input->getHeaders()->getCreationDateTime);
+        $Stmt->addChild('CreDtTm', $input->getHeaders()->getCreationDateTime());
 
         $Acct = $Stmt->addChild('Acct');
         $AcctId = $Acct->addChild('Id');
