@@ -2,18 +2,12 @@
 
 namespace BSExporter;
 
-use BSExporter\Exporters\ExporterInterface;
 use BSExporter\Factory\ExporterFactory;
 use BSExporter\Factory\ExporterFactoryInterface;
 use BSExporter\Inputs\InputInterface;
 
 class BSExporter
 {
-    /**
-     * @var ExporterInterface
-     */
-    private $exporter;
-
     /**
      * @var ExporterFactoryInterface
      */
@@ -26,10 +20,8 @@ class BSExporter
 
     public function export(InputInterface $input): string
     {
-        //ToDo: select exporter by factory
+        $exporter = $this->factory->create($input);
 
-        //ToDo: use exporter to generate return
-
-        return '';
+        return $exporter->export($input);
     }
 }
