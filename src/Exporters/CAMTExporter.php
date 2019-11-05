@@ -18,7 +18,7 @@ class CAMTExporter implements ExporterInterface
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.02">
 </Document>'
         );
-//ToDo: Any possibility to automatize this by input parameters?
+
         $BkToCstmrStmt = $xml->addChild('BkToCstmrStmt');
 
         $GrpHdr = $BkToCstmrStmt->addChild('GrpHdr');
@@ -46,12 +46,41 @@ class CAMTExporter implements ExporterInterface
             $Bal->addChild('Dt')->addChild('Dt', $balance->getDate());
         }
 
-//        $Stmt->addChild('TxsSummry'); // [0..1]
+        $TxsSummry = $Stmt->addChild('TxsSummry');
 
+        $TtlNtries = $TxsSummry->addChild('TtlNtries');
+        $TtlNtries->addChild('NbOfNtries', $input->getTransactionSummary()->getTotalEntries());
+        $TtlNtries->addChild('Sum', $input->getTransactionSummary()->getSum());
+        $TtlNtries->addChild('TtlNetNtryAmt', $input->getTransactionSummary()->getTotalNetEntryAmount());
+        $TtlNtries->addChild('CdtDbtInd', $input->getTransactionSummary()->getCreditDebitIndicator());
 
-//        foreach ($input->getTransactions() as $transaction) { // [0..1]
-//            $Stmt->addChild('Ntry');
-//        }
+        $TtlCdtNtries = $TtlNtries->addChild('TtlCdtNtries');
+        $TtlCdtNtries->addChild('NbOfNtries', $input->getTransactionSummary()->countCreditEntries());
+        $TtlCdtNtries->addChild('Sum', $input->getTransactionSummary()->calculateCreditSum());
+
+        $TtlDbtNtries = $TtlNtries->addChild('TtlDbtNtries');
+        $TtlDbtNtries->addChild('NbOfNtries', $input->getTransactionSummary()->countDebitEntries());
+        $TtlDbtNtries->addChild('Sum', $input->getTransactionSummary()->calculateDebitSum());
+
+        foreach ($input->getTransactions() as $transaction) {
+            $Ntry = $Stmt->addChild('Ntry');
+            $Ntry->addChild('NtryRef', $transaction->getEntryReference());
+            $Ntry->addChild('Amt', $transaction->getAmount())
+                ->addAttribute('Ccy', $transaction->getCurrency());
+            $Ntry->addChild('CdtDbtInd', $transaction->getCreditDebitIndicator());
+            $Ntry->addChild('Sts', $transaction->getStatus());
+
+            $Ntry->addChild('BookgDt')->addChild('Dt', $transaction->getBookingDate());
+            $Ntry->addChild('ValDt')->addChild('Dt', $transaction->getValueDate());
+
+            $Ntry->addChild('AcctSvcrRef', $transaction->getAccountServicerReference());
+
+            if (!empty($transaction->getBankTransactionCode())) {
+                $Ntry->addChild('BkTxCd')
+                    ->addChild('Prtry')
+                    ->addChild('Cd', $transaction->getBankTransactionCode());
+            }
+        }
 
         return $xml->asXML();
     }

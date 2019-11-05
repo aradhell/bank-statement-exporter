@@ -53,7 +53,7 @@ class Transaction
      * if available, of tag ?10 in field-86 from an incoming SWIFT MT940.
      * @var string
      */
-    private $bankTransactionCode;
+    private $bankTransactionCode = '';
 
     public function __construct()
     {

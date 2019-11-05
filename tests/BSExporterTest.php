@@ -10,6 +10,7 @@ use BSExporter\Inputs\CAMT\CAMTInput;
 use BSExporter\Inputs\CAMT\Headers;
 use BSExporter\Inputs\CAMT\TransactionBuilder;
 use BSExporter\Inputs\CAMT\TransactionSummary;
+use BSExporter\Inputs\InputInterface;
 use DateTimeZone;
 use PHPUnit\Framework\TestCase;
 
@@ -18,16 +19,17 @@ class BSExporterTest extends TestCase
 
     public function testCAMTFullExportSuccess(): void
     {
+        $bsexporter = new BSExporter();
         $input = $this->createCAMTInput();
-        $factory = new ExporterFactory();
 
-        $exporter = $factory->create($input);
+        $result = $bsexporter->export($input);
 
-        $result = $exporter->export($input);
-        print_r($result);
+        $expected = $this->createCAMTFile($input);
+
+        $this->assertEquals($expected, $result);
     }
 
-    public function testFactoryCAMT(): void
+    public function testFactoryCAMTSuccess(): void
     {
         $input = new CAMTInput(
             [],
@@ -44,6 +46,16 @@ class BSExporterTest extends TestCase
         $this->assertEquals(new CAMTExporter(), $result);
     }
 
+    public function testFactoryFailClassNotExist(): void
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Exporter not implemented.');
+
+        $input = new class implements InputInterface {};
+        $factory = new ExporterFactory();
+
+        $factory->create($input);
+    }
 
     private function createCAMTInput(): CAMTInput
     {
@@ -70,6 +82,7 @@ class BSExporterTest extends TestCase
             ->setBookingDate($bookingDate)
             ->setValueDate($valueDate)
             ->setAccountServicerReference('accountServicerRef')
+            ->setBankTransactionCode('544')
             ->build();
 
         $transactions = [$transactionCrdt, $transactionDbit];
@@ -82,16 +95,26 @@ class BSExporterTest extends TestCase
 
         $headers = new Headers('message_id', $creationDateTime, 'id', 'seqno');
 
-        $balance = new Balance('OPBD', 'EUR', 15286.98, 'CRDT', $bookingDate);
+        $balance = [new Balance('OPBD', 'EUR', 15286.98, 'CRDT', $bookingDate)];
 
         $CAMTInput = new CAMTInput(
             $transactions,
-            [$balance],
+            $balance,
             $account,
             $headers,
             $transactionSummary
         );
 
         return $CAMTInput;
+    }
+
+    private function createCAMTFile(CAMTInput $input): string
+    {
+        $creationDT = $input->getHeaders()->getCreationDateTime();
+
+        return '<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.02">
+<BkToCstmrStmt><GrpHdr><MsgId>message_id</MsgId><CreDtTm>' . $creationDT . '</CreDtTm></GrpHdr><Stmt><Id>id</Id><ElctrncSeqNb>seqno</ElctrncSeqNb><CreDtTm>' . $creationDT . '</CreDtTm><Acct><Id><IBAN>iban</IBAN></Id><Ccy>currency</Ccy><Nm>name</Nm></Acct><Bal><Tp><CdOrPrtry><Cd>OPBD</Cd></CdOrPrtry></Tp><Amt Ccy="EUR">15286.98</Amt><CdtDbtInd>CRDT</CdtDbtInd><Dt><Dt>2019-10-28</Dt></Dt></Bal><TxsSummry><TtlNtries><NbOfNtries>2</NbOfNtries><Sum>168246.12</Sum><TtlNetNtryAmt>100000.1</TtlNetNtryAmt><CdtDbtInd>CRDT</CdtDbtInd><TtlCdtNtries><NbOfNtries>1</NbOfNtries><Sum>134123.11</Sum></TtlCdtNtries><TtlDbtNtries><NbOfNtries>1</NbOfNtries><Sum>34123.01</Sum></TtlDbtNtries></TtlNtries></TxsSummry><Ntry><NtryRef>reference</NtryRef><Amt Ccy="EUR">134123.11</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts><BookgDt><Dt>2019-10-28</Dt></BookgDt><ValDt><Dt>2019-10-28</Dt></ValDt><AcctSvcrRef>accountServicerRef</AcctSvcrRef></Ntry><Ntry><NtryRef>reference</NtryRef><Amt Ccy="EUR">34123.01</Amt><CdtDbtInd>DBIT</CdtDbtInd><Sts>BOOK</Sts><BookgDt><Dt>2019-10-28</Dt></BookgDt><ValDt><Dt>2019-10-28</Dt></ValDt><AcctSvcrRef>accountServicerRef</AcctSvcrRef><BkTxCd><Prtry><Cd>544</Cd></Prtry></BkTxCd></Ntry></Stmt></BkToCstmrStmt></Document>
+';
     }
 }
