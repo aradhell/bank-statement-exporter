@@ -112,7 +112,7 @@ class TransactionSummary
 
     private function calculateSumByType(string $type): float
     {
-        $result = 0;
+        $result = 0.00;
 
         foreach ($this->transactions as $transaction) {
             if ($transaction->getCreditDebitIndicator() === $type) {

@@ -75,9 +75,11 @@ class CAMTExporter implements ExporterInterface
 
             $Ntry->addChild('AcctSvcrRef', $transaction->getAccountServicerReference());
 
-            $Ntry->addChild('BkTxCd')
-                ->addChild('Prtry')
-                ->addChild('Cd', $transaction->getBankTransactionCode());
+            if (!empty($transaction->getBankTransactionCode())) {
+                $Ntry->addChild('BkTxCd')
+                    ->addChild('Prtry')
+                    ->addChild('Cd', $transaction->getBankTransactionCode());
+            }
         }
 
         return $xml->asXML();

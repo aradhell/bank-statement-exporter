@@ -2,3 +2,6 @@
 /vendor
 clover.xml
 .phpunit.result.cache
+
+#Code coverage
+/report
