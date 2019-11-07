@@ -17,7 +17,7 @@ class Balance
     /**
      * @var string Currency code.
      */
-    private $currency;
+    private $currencyCode;
 
     /**
      * @var string Decimal pointer: ','.
@@ -25,16 +25,16 @@ class Balance
     private $amount;
 
     /**
-     * @param string $indicator
-     * @param string $date
-     * @param string $currency
-     * @param string $amount
+     * @param string $indicator Credit/Debit indicator. Value 'C' or 'D'.
+     * @param string $date Format YYMMDD.
+     * @param string $currencyCode Currency code.
+     * @param string $amount Decimal pointer: ','.
      */
-    public function __construct(string $indicator, string $date, string $currency, string $amount)
+    public function __construct(string $indicator, string $date, string $currencyCode, string $amount)
     {
         $this->indicator = $indicator;
         $this->date = $date;
-        $this->currency = $currency;
+        $this->currencyCode = $currencyCode;
         $this->amount = $amount;
     }
 
@@ -57,9 +57,9 @@ class Balance
     /**
      * @return string
      */
-    public function getCurrency(): string
+    public function getCurrencyCode(): string
     {
-        return $this->currency;
+        return $this->currencyCode;
     }
 
     /**

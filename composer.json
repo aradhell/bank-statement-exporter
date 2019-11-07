@@ -2,7 +2,7 @@
   "name": "aradhell/bank-statement-exporter",
   "description": "Exports bank statements from given input",
   "license": "MIT",
-  "keywords": ["bank statement","camt export"],
+  "keywords": ["bank statement","camt export", "mt940 export"],
   "authors": [
     {
       "name": "Alper Cevik",
@@ -24,6 +24,11 @@
   "autoload": {
     "psr-4": {
       "BSExporter\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "BSExporter\\": "tests/"
     }
   }
 }

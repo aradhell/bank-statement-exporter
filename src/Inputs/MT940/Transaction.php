@@ -103,7 +103,7 @@ class Transaction
      * @param string $amount
      * @return Transaction
      */
-    public function setAmount(string $amount): TransactionB
+    public function setAmount(string $amount): Transaction
     {
         $this->amount = $amount;
 
@@ -132,7 +132,7 @@ class Transaction
     /**
      * @return string|null
      */
-    public function getReference(): ?string
+    public function getBankReference(): ?string
     {
         return $this->bankReference;
     }
@@ -141,7 +141,7 @@ class Transaction
      * @param string|null $bankReference
      * @return Transaction
      */
-    public function setReference(?string $bankReference): Transaction
+    public function setBankReference(?string $bankReference): Transaction
     {
         $this->bankReference = $bankReference;
 

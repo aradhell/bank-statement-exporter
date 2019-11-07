@@ -83,12 +83,12 @@ class TransactionBuilder
      * @param string|null $bankReference
      * @return TransactionBuilder
      */
-    public function setReference(?string $bankReference): TransactionBuilder
+    public function setBankReference(?string $bankReference): TransactionBuilder
     {
         if ($bankReference !== null && substr($bankReference, 0, 2) !== '//') {
             $bankReference = '//' . $bankReference;
         }
-        $this->transaction->setReference($bankReference);
+        $this->transaction->setBankReference($bankReference);
 
         return $this;
     }
