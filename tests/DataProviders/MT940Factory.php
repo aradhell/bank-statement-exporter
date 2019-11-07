@@ -39,7 +39,8 @@ class MT940Factory
             ->setIndicator('D')
             ->setAmount('321')
             ->setType('NTRFEREF')
-            ->setBankReference('19281343127574');
+            ->setBankReference('19281343127574')
+            ->build();
 
         $transactionBuilder->reset();
 
@@ -47,7 +48,8 @@ class MT940Factory
             ->setIndicator('C')
             ->setAmount('852,13')
             ->setType('NTRFNONREF')
-            ->setBankReference('//19278366059677');
+            ->setBankReference('//19278366059677')
+            ->build();
 
         $transactions = [$transaction_1, $transaction_2, $transaction_3];
 
@@ -68,6 +70,7 @@ class MT940Factory
 :61:1910281028C1234,00NTRFNONREF
 :61:1910281028D321NTRFEREF//19281343127574
 :61:191028C852,13NTRFNONREF//19278366059677
-:62F:C191028EUR657,11';
+:62F:C191028EUR657,11
+';
     }
 }

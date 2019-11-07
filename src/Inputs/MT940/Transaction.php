@@ -147,4 +147,20 @@ class Transaction
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        $result = $this->getValueDate();
+        if (!empty($this->getEntryDate())) {
+            $result .= $this->getEntryDate();
+        }
+        $result .= $this->getIndicator() . $this->getAmount() . $this->getType();
+        if (!empty($this->getBankReference())) {
+            $result .= $this->getBankReference();
+        }
+
+        return $result;
+    }
+
+
 }

@@ -27,4 +27,28 @@ class MT940Input implements InputInterface
         $this->transactions = $transactions;
         $this->footer = $footer;
     }
+
+    /**
+     * @return Header
+     */
+    public function getHeader(): Header
+    {
+        return $this->header;
+    }
+
+    /**
+     * @return Transaction[]
+     */
+    public function getTransactions(): array
+    {
+        return $this->transactions;
+    }
+
+    /**
+     * @return Footer
+     */
+    public function getFooter(): Footer
+    {
+        return $this->footer;
+    }
 }

@@ -69,4 +69,9 @@ class Balance
     {
         return $this->amount;
     }
+
+    public function __toString(): string
+    {
+        return $this->getIndicator() . $this->getDate() . $this->getCurrencyCode() . $this->getAmount();
+    }
 }

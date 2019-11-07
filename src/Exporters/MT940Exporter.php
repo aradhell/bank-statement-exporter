@@ -13,6 +13,23 @@ class MT940Exporter implements ExporterInterface
      */
     public function export(InputInterface $input): string
     {
-        return '';
+        $result = ':20:' . $input->getHeader()->getTransactionReferenceNumber() . PHP_EOL;
+        $result .= ':25:' . $input->getHeader()->getAccountNumber() . PHP_EOL;
+        $result .= ':28C:' . $input->getHeader()->getStatementNumber() . PHP_EOL;
+        $result .= ':60F:' . $input->getHeader()->getOpeningBalance() . PHP_EOL;
+
+        foreach ($input->getTransactions() as $transaction) {
+            $result .= ':61:' . $transaction . PHP_EOL;
+        }
+
+        $result .= ':62F:' . $input->getFooter()->getClosingBalance() . PHP_EOL;
+        if (!empty($input->getFooter()->getClosingAvailableBalance())) {
+            $result .= ':64:' . $input->getFooter()->getClosingAvailableBalance() . PHP_EOL;
+        }
+        if (!empty($input->getFooter()->getForwardValueBalance())) {
+            $result .= ':65:' . $input->getFooter()->getForwardValueBalance() . PHP_EOL;
+        }
+
+        return $result;
     }
 }

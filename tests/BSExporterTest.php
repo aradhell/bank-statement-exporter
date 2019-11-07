@@ -14,6 +14,9 @@ class BSExporterTest extends TestCase
 {
     /**
      * @dataProvider fullExportDataProvider
+     *
+     * @param InputInterface
+     * @param string $expected
      */
     public function testFullExportSuccess($input, $expected): void
     {
@@ -42,6 +45,11 @@ class BSExporterTest extends TestCase
 
     /**
      * @dataProvider factoryDataProvider
+     *
+     * @param InputInterface $input
+     * @param string $className
+     *
+     * @throws \Exception
      */
     public function testFactoryCAMTSuccess($input, $className): void
     {
