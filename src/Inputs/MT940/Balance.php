@@ -5,22 +5,22 @@ namespace BSExporter\Inputs\MT940;
 class Balance
 {
     /**
-     * @var string
+     * @var string Credit/Debit indicator. Value 'C' or 'D'.
      */
     private $indicator;
 
     /**
-     * @var string
+     * @var string Format YYMMDD.
      */
     private $date;
 
     /**
-     * @var string
+     * @var string Currency code.
      */
     private $currency;
 
     /**
-     * @var string
+     * @var string Decimal pointer: ','.
      */
     private $amount;
 

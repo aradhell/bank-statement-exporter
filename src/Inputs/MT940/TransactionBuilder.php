@@ -36,10 +36,10 @@ class TransactionBuilder
     }
 
     /**
-     * @param string $entryDate
+     * @param string|null $entryDate
      * @return TransactionBuilder
      */
-    public function setEntryDate(string $entryDate): TransactionBuilder
+    public function setEntryDate(?string $entryDate): TransactionBuilder
     {
         $this->transaction->setEntryDate($entryDate);
 
@@ -80,15 +80,15 @@ class TransactionBuilder
     }
 
     /**
-     * @param string $reference
+     * @param string|null $bankReference
      * @return TransactionBuilder
      */
-    public function setReference(string $reference): TransactionBuilder
+    public function setReference(?string $bankReference): TransactionBuilder
     {
-        if (substr($reference, 0, 2) !== '//') {
-            $reference = '//' . $reference;
+        if ($bankReference !== null && substr($bankReference, 0, 2) !== '//') {
+            $bankReference = '//' . $bankReference;
         }
-        $this->transaction->setReference($reference);
+        $this->transaction->setReference($bankReference);
 
         return $this;
     }

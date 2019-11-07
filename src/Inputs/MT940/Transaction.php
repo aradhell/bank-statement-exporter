@@ -10,9 +10,9 @@ class Transaction
     private $valueDate;
 
     /**
-     * @var string Format MMDD.
+     * @var string|null Format MMDD.
      */
-    private $entryDate;
+    private $entryDate = null;
 
     /**
      * @var string Credit/Debit indicator. Value 'C' or 'D'.
@@ -30,9 +30,9 @@ class Transaction
     private $type;
 
     /**
-     * @var string Begins with '//'.
+     * @var string|null Account Servicing Institution’s Reference. Begins with '//'.
      */
-    private $reference;
+    private $bankReference = null;
 
     /**
      * @return string
@@ -54,18 +54,18 @@ class Transaction
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEntryDate(): string
+    public function getEntryDate(): ?string
     {
         return $this->entryDate;
     }
 
     /**
-     * @param string $entryDate
+     * @param string|null $entryDate
      * @return Transaction
      */
-    public function setEntryDate(string $entryDate): Transaction
+    public function setEntryDate(?string $entryDate): Transaction
     {
         $this->entryDate = $entryDate;
 
@@ -130,20 +130,20 @@ class Transaction
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getReference(): string
+    public function getReference(): ?string
     {
-        return $this->reference;
+        return $this->bankReference;
     }
 
     /**
-     * @param string $reference
+     * @param string|null $bankReference
      * @return Transaction
      */
-    public function setReference(string $reference): Transaction
+    public function setReference(?string $bankReference): Transaction
     {
-        $this->reference = $reference;
+        $this->bankReference = $bankReference;
 
         return $this;
     }
