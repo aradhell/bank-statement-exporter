@@ -4,8 +4,8 @@ namespace BSExporter;
 
 use BSExporter\Exporters\CAMTExporter;
 use BSExporter\Exporters\MT940Exporter;
-use BSExporter\DataProviders\CAMTFactory;
-use BSExporter\DataProviders\MT940Factory;
+use BSExporter\DataProviders\CAMTTestDataProvider;
+use BSExporter\DataProviders\MT940TestDataProvider;
 use BSExporter\Factory\ExporterFactory;
 use BSExporter\Inputs\InputInterface;
 use PHPUnit\Framework\TestCase;
@@ -29,16 +29,16 @@ class BSExporterTest extends TestCase
 
     public function fullExportDataProvider(): array
     {
-        $camtInput = CAMTFactory::createCAMTInput();
+        $camtInput = CAMTTestDataProvider::createCAMTInput();
 
         return [
             [
                 $camtInput,
-                CAMTFactory::createCAMTFile($camtInput),
+                CAMTTestDataProvider::createCAMTFile($camtInput),
             ],
             [
-                MT940Factory::createMT940Input(),
-                MT940Factory::createMT940File(),
+                MT940TestDataProvider::createMT940Input(),
+                MT940TestDataProvider::createMT940File(),
             ],
         ];
     }
@@ -65,11 +65,11 @@ class BSExporterTest extends TestCase
     {
         return [
             [
-                CAMTFactory::createCAMTInput(),
+                CAMTTestDataProvider::createCAMTInput(),
                 CAMTExporter::class,
             ],
             [
-                MT940Factory::createMT940Input(),
+                MT940TestDataProvider::createMT940Input(),
                 MT940Exporter::class
             ],
         ];

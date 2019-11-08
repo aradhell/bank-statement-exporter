@@ -8,7 +8,7 @@ use BSExporter\Inputs\MT940\Header;
 use BSExporter\Inputs\MT940\MT940Input;
 use BSExporter\Inputs\MT940\TransactionBuilder;
 
-class MT940Factory
+class MT940TestDataProvider
 {
     public static function createMT940Input(): MT940Input
     {

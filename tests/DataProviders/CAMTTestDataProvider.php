@@ -11,7 +11,7 @@ use BSExporter\Inputs\CAMT\TransactionSummary;
 use DateTime;
 use DateTimeZone;
 
-class CAMTFactory
+class CAMTTestDataProvider
 {
     public static function createCAMTInput(): CAMTInput
     {
