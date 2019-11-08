@@ -69,10 +69,13 @@ class Transaction
 
     /**
      * @param string $entryReference
+     * @return Transaction
      */
-    public function setEntryReference(string $entryReference): void
+    public function setEntryReference(string $entryReference): Transaction
     {
         $this->entryReference = $entryReference;
+
+        return $this;
     }
 
     /**
@@ -85,10 +88,13 @@ class Transaction
 
     /**
      * @param float $amount
+     * @return Transaction
      */
-    public function setAmount(float $amount): void
+    public function setAmount(float $amount): Transaction
     {
         $this->amount = $amount;
+
+        return $this;
     }
 
     /**
@@ -101,10 +107,13 @@ class Transaction
 
     /**
      * @param string $currency
+     * @return Transaction
      */
-    public function setCurrency(string $currency): void
+    public function setCurrency(string $currency): Transaction
     {
         $this->currency = $currency;
+
+        return $this;
     }
 
     /**
@@ -117,10 +126,13 @@ class Transaction
 
     /**
      * @param string $creditDebitIndicator
+     * @return Transaction
      */
-    public function setCreditDebitIndicator(string $creditDebitIndicator): void
+    public function setCreditDebitIndicator(string $creditDebitIndicator): Transaction
     {
         $this->creditDebitIndicator = $creditDebitIndicator;
+
+        return $this;
     }
 
     /**
@@ -133,10 +145,13 @@ class Transaction
 
     /**
      * @param string $status
+     * @return Transaction
      */
-    public function setStatus(string $status): void
+    public function setStatus(string $status): Transaction
     {
         $this->status = $status;
+
+        return $this;
     }
 
     /**
@@ -149,10 +164,13 @@ class Transaction
 
     /**
      * @param string $bookingDate
+     * @return Transaction
      */
-    public function setBookingDate(string $bookingDate): void
+    public function setBookingDate(string $bookingDate): Transaction
     {
         $this->bookingDate = $bookingDate;
+
+        return $this;
     }
 
     /**
@@ -165,10 +183,13 @@ class Transaction
 
     /**
      * @param string $valueDate
+     * @return Transaction
      */
-    public function setValueDate(string $valueDate): void
+    public function setValueDate(string $valueDate): Transaction
     {
         $this->valueDate = $valueDate;
+
+        return $this;
     }
 
     /**
@@ -181,10 +202,13 @@ class Transaction
 
     /**
      * @param string $accountServicerReference
+     * @return Transaction
      */
-    public function setAccountServicerReference(string $accountServicerReference): void
+    public function setAccountServicerReference(string $accountServicerReference): Transaction
     {
         $this->accountServicerReference = $accountServicerReference;
+
+        return $this;
     }
 
     /**
@@ -197,9 +221,12 @@ class Transaction
 
     /**
      * @param string $bankTransactionCode
+     * @return Transaction
      */
-    public function setBankTransactionCode(string $bankTransactionCode): void
+    public function setBankTransactionCode(string $bankTransactionCode): Transaction
     {
         $this->bankTransactionCode = $bankTransactionCode;
+
+        return $this;
     }
 }
