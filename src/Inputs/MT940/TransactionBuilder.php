@@ -92,4 +92,11 @@ class TransactionBuilder
 
         return $this;
     }
+
+    public function setDescription(?string $description): TransactionBuilder
+    {
+        $this->transaction->setDescription($description);
+
+        return $this;
+    }
 }

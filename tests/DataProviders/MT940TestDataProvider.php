@@ -40,6 +40,7 @@ class MT940TestDataProvider
             ->setAmount('321')
             ->setType('NTRFEREF')
             ->setBankReference('19281343127574')
+            ->setDescription('/EREF/03-10-2019 13:54 0020002657175237//CNTP/NL70RABO0115600000/RABONL2U/Houtenbouwmaterialen.nl via Mollie///REMI/USTD//M0321335M12VRE6A 0020002657175237 1000006627 houtenbouwmaterialen.nl/')
             ->build();
 
         $transactionBuilder->reset();
@@ -69,6 +70,7 @@ class MT940TestDataProvider
 :60F:C191028EUR541,87
 :61:1910281028C1234,00NTRFNONREF
 :61:1910281028D321NTRFEREF//19281343127574
+:86:/EREF/03-10-2019 13:54 0020002657175237//CNTP/NL70RABO0115600000/RABONL2U/Houtenbouwmaterialen.nl via Mollie///REMI/USTD//M0321335M12VRE6A 0020002657175237 1000006627 houtenbouwmaterialen.nl/
 :61:191028C852,13NTRFNONREF//19278366059677
 :62F:C191028EUR657,11
 ';
