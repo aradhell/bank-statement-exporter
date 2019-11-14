@@ -35,6 +35,11 @@ class Transaction
     private $bankReference = null;
 
     /**
+     * @var string|null
+     */
+    private $description = null;
+
+    /**
      * @return string
      */
     public function getValueDate(): string
@@ -148,6 +153,25 @@ class Transaction
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return Transaction
+     */
+    public function setDescription(string $description): Transaction
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
     public function __toString(): string
     {
         $result = $this->getValueDate();
@@ -157,6 +181,10 @@ class Transaction
         $result .= $this->getIndicator() . $this->getAmount() . $this->getType();
         if (!empty($this->getBankReference())) {
             $result .= $this->getBankReference();
+        }
+
+        if (!empty($this->getDescription())) {
+            $result .= PHP_EOL . ':86:' . $this->getDescription();
         }
 
         return $result;
