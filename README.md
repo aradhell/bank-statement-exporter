@@ -1,4 +1,12 @@
-##Export CAMT
+##Installation
+`composer require aradhell/bank-statement-exporter`
+###Requirements
+* PHP ^7.2
+* Composer
+* ext-simplexml
+
+##Usage
+###Export CAMT
 
 ####Create CAMTInput
 
@@ -59,3 +67,4 @@ $bsexporter = new BSExporter();
    
 $result = $bsexporter->export($CAMTInput);
 ```
+---
