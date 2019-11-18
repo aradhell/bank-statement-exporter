@@ -1,14 +1,14 @@
-##Installation
+## Installation
 `composer require aradhell/bank-statement-exporter`
-###Requirements
+### Requirements
 * PHP ^7.2
 * Composer
 * ext-simplexml
 
-##Usage
-###Export CAMT
+## Usage
+### Export CAMT
 
-####Create CAMTInput
+#### Create CAMTInput
 
 ```php
 $bookingDate = '2019-10-28'; //transaction booking date
@@ -61,7 +61,7 @@ $CAMTInput = new CAMTInput(
 );
 ```
 
-####Create BSExporter
+#### Create BSExporter
 ```php 
 $bsexporter = new BSExporter();
    
