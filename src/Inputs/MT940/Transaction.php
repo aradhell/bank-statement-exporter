@@ -35,7 +35,7 @@ class Transaction
     private $bankReference = null;
 
     /**
-     * @var string|null
+     * @var string|null Field :86:
      */
     private $description = null;
 
@@ -48,7 +48,7 @@ class Transaction
     }
 
     /**
-     * @param string $valueDate
+     * @param string $valueDate Format YYMMDD.
      * @return Transaction
      */
     public function setValueDate(string $valueDate): Transaction
@@ -67,7 +67,7 @@ class Transaction
     }
 
     /**
-     * @param string|null $entryDate
+     * @param string|null $entryDate Format MMDD.
      * @return Transaction
      */
     public function setEntryDate(?string $entryDate): Transaction
@@ -86,7 +86,7 @@ class Transaction
     }
 
     /**
-     * @param string $indicator
+     * @param string $indicator Credit/Debit indicator. Value 'C' or 'D'.
      * @return Transaction
      */
     public function setIndicator(string $indicator): Transaction
@@ -105,7 +105,7 @@ class Transaction
     }
 
     /**
-     * @param string $amount
+     * @param string $amount Decimal pointer: ','.
      * @return Transaction
      */
     public function setAmount(string $amount): Transaction
@@ -124,7 +124,7 @@ class Transaction
     }
 
     /**
-     * @param string $type
+     * @param string $type For example NTRFNONREF.
      * @return Transaction
      */
     public function setType(string $type): Transaction
@@ -143,7 +143,7 @@ class Transaction
     }
 
     /**
-     * @param string|null $bankReference
+     * @param string|null $bankReference Account Servicing Institution’s Reference. Begins with '//'.
      * @return Transaction
      */
     public function setBankReference(?string $bankReference): Transaction
@@ -162,10 +162,10 @@ class Transaction
     }
 
     /**
-     * @param string $description
+     * @param string|null $description Field :86:
      * @return Transaction
      */
-    public function setDescription(string $description): Transaction
+    public function setDescription(?string $description): Transaction
     {
         $this->description = $description;
 
@@ -189,6 +189,4 @@ class Transaction
 
         return $result;
     }
-
-
 }

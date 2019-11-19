@@ -20,9 +20,9 @@ class Footer
     private $forwardValueBalance = null;
 
     /**
-     * @param Balance $closingBalance
-     * @param Balance|null $closingAvailableBalance
-     * @param Balance|null $forwardValueBalance
+     * @param Balance $closingBalance Field :62F:
+     * @param Balance|null $closingAvailableBalance Field :64:
+     * @param Balance|null $forwardValueBalance Field :65:
      */
     public function __construct(Balance $closingBalance, ?Balance $closingAvailableBalance = null, ?Balance $forwardValueBalance = null)
     {
@@ -32,7 +32,7 @@ class Footer
     }
 
     /**
-     * @return Balance
+     * @return Balance :62F:
      */
     public function getClosingBalance(): Balance
     {
@@ -40,7 +40,7 @@ class Footer
     }
 
     /**
-     * @return Balance|null
+     * @return Balance|null Field :64:
      */
     public function getClosingAvailableBalance(): ?Balance
     {
@@ -48,7 +48,7 @@ class Footer
     }
 
     /**
-     * @return Balance|null
+     * @return Balance|null Field :65:
      */
     public function getForwardValueBalance(): ?Balance
     {
