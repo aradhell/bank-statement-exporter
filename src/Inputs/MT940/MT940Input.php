@@ -12,7 +12,7 @@ class MT940Input implements InputInterface
     private $header;
 
     /**
-     * @var Transaction[] Field :61:. [0..*]
+     * @var Transaction[] Fields :61:. [0..*]
      */
     private $transactions;
 
@@ -21,6 +21,11 @@ class MT940Input implements InputInterface
      */
     private $footer;
 
+    /**
+     * @param Header $header
+     * @param Transaction[] $transactions Fields :61: [0..*]
+     * @param Footer $footer
+     */
     public function __construct(Header $header, array $transactions, Footer $footer)
     {
         $this->header = $header;

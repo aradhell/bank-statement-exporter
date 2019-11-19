@@ -14,18 +14,26 @@ class TransactionBuilder
         $this->reset();
     }
 
+    /**
+     * Returns Transaction.
+     *
+     * @return Transaction
+     */
     public function build(): Transaction
     {
         return $this->transaction;
     }
 
+    /**
+     * Sets new blank Transaction.
+     */
     public function reset(): void
     {
         $this->transaction = new Transaction();
     }
 
     /**
-     * @param string $valueDate
+     * @param string $valueDate Format YYMMDD.
      * @return TransactionBuilder
      */
     public function setValueDate(string $valueDate): TransactionBuilder
@@ -36,7 +44,7 @@ class TransactionBuilder
     }
 
     /**
-     * @param string|null $entryDate
+     * @param string|null $entryDate Format MMDD.
      * @return TransactionBuilder
      */
     public function setEntryDate(?string $entryDate): TransactionBuilder
@@ -47,7 +55,7 @@ class TransactionBuilder
     }
 
     /**
-     * @param string $indicator
+     * @param string $indicator Credit/Debit indicator. Value 'C' or 'D'.
      * @return TransactionBuilder
      */
     public function setIndicator(string $indicator): TransactionBuilder
@@ -58,7 +66,7 @@ class TransactionBuilder
     }
 
     /**
-     * @param string $amount
+     * @param string $amount Decimal pointer: ','.
      * @return TransactionBuilder
      */
     public function setAmount(string $amount): TransactionBuilder
@@ -69,7 +77,7 @@ class TransactionBuilder
     }
 
     /**
-     * @param string $type
+     * @param string $type For example NTRFNONREF.
      * @return TransactionBuilder
      */
     public function setType(string $type): TransactionBuilder
@@ -80,7 +88,7 @@ class TransactionBuilder
     }
 
     /**
-     * @param string|null $bankReference
+     * @param string|null $bankReference Account Servicing Institution’s Reference. Begins with '//'.
      * @return TransactionBuilder
      */
     public function setBankReference(?string $bankReference): TransactionBuilder
@@ -93,6 +101,10 @@ class TransactionBuilder
         return $this;
     }
 
+    /**
+     * @param string|null $description Field :86:
+     * @return TransactionBuilder
+     */
     public function setDescription(?string $description): TransactionBuilder
     {
         $this->transaction->setDescription($description);

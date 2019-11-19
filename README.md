@@ -68,3 +68,69 @@ $bsexporter = new BSExporter();
 $result = $bsexporter->export($CAMTInput);
 ```
 ---
+
+### Export MT940
+
+#### Create MT940Input
+
+```php
+$valueDate = '191028'; // Format YYMMDD
+$entryDate = '1028'; // Format MMDD
+
+$openingBalance = new Balance('C', $valueDate, 'EUR', '541,87');
+$header = new Header(
+    'P191007000000001', // :20:
+    'NL81INGB0006010913EUR', // :25:
+    '00000', // :28C:
+    $openingBalance // :60F:
+);
+
+$transactionBuilder = new TransactionBuilder();
+
+$transaction_1 = $transactionBuilder->setValueDate($valueDate)
+    ->setEntryDate($entryDate)
+    ->setIndicator('C')
+    ->setAmount('1234,00')
+    ->setType('NTRFNONREF')
+    ->build();
+
+$transactionBuilder->reset(); // reset builder to create a new transaction
+
+$transaction_2 = $transactionBuilder->setValueDate($valueDate)
+    ->setEntryDate($entryDate)
+    ->setIndicator('D')
+    ->setAmount('321')
+    ->setType('NTRFEREF')
+    ->setBankReference('19281343127574')
+    ->setDescription('/EREF/03-10-2019 13:54 0020002657175237//CNTP/NL70RABO0115600000/RABONL2U/Houtenbouwmaterialen.nl via Mollie///REMI/USTD//M0321335M12VRE6A 0020002657175237 1000006627 houtenbouwmaterialen.nl/')
+    ->build();
+
+$transactionBuilder->reset();
+
+$transaction_3 = $transactionBuilder->setValueDate($valueDate)
+    ->setIndicator('C')
+    ->setAmount('852,13')
+    ->setType('NTRFNONREF')
+    ->setBankReference('//19278366059677')
+    ->build();
+
+$transactions = [$transaction_1, $transaction_2, $transaction_3];
+
+$closingBalance = new Balance('C', $valueDate, 'EUR', '657,11');
+$closingAvailableBalance = new Balance('C', $valueDate, 'EUR', '861,68');
+$forwardValueBalance = new Balance('C', $valueDate, 'EUR', '861,68');
+$footer = new Footer(
+    $closingBalance, // :62F
+    $closingAvailableBalance // :64:
+    $forwardValueBalance // :65:
+);
+
+$MT940Input = new MT940Input($header, $transactions, $footer);
+```
+
+#### Create BSExporter
+```php 
+$bsexporter = new BSExporter();
+   
+$result = $bsexporter->export($MT940Input);
+```

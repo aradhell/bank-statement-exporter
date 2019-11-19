@@ -25,10 +25,10 @@ class Header
     private $openingBalance;
 
     /**
-     * @param string $transactionReferenceNumber
-     * @param string $accountNumber
-     * @param string $statementNumber
-     * @param Balance $openingBalance
+     * @param string $transactionReferenceNumber Field :20:
+     * @param string $accountNumber Field :25:
+     * @param string $statementNumber Field :28C:
+     * @param Balance $openingBalance Field :60F:
      */
     public function __construct(string $transactionReferenceNumber, string $accountNumber, string $statementNumber, Balance $openingBalance)
     {
@@ -39,7 +39,7 @@ class Header
     }
 
     /**
-     * @return string
+     * @return string Field :20:
      */
     public function getTransactionReferenceNumber(): string
     {
@@ -47,7 +47,7 @@ class Header
     }
 
     /**
-     * @return string
+     * @return string Field :25:
      */
     public function getAccountNumber(): string
     {
@@ -55,7 +55,7 @@ class Header
     }
 
     /**
-     * @return string
+     * @return string Field :28C:
      */
     public function getStatementNumber(): string
     {
@@ -63,7 +63,7 @@ class Header
     }
 
     /**
-     * @return Balance
+     * @return Balance Field :60F:
      */
     public function getOpeningBalance(): Balance
     {
